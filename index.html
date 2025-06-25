@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real_Studio - Официальный сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #f1f1f1;
+            --gray: #8a8a8a;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--highlight);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--text);
+            margin-left: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--highlight);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            color: var(--highlight);
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .game-card {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-header {
+            background: var(--accent);
+            padding: 1.2rem;
+        }
+        
+        .game-header h3 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+        }
+        
+        .game-info {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-info p {
+            margin: 0.5rem 0;
+            color: var(--gray);
+        }
+        
+        .game-info strong {
+            color: var(--text);
+        }
+        
+        .server-card {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .server-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .server-header h3 {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--highlight);
+        }
+        
+        .server-date {
+            background: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .server-info p {
+            margin: 0.8rem 0;
+            color: var(--gray);
+        }
+        
+        .server-info a {
+            color: var(--highlight);
+            text-decoration: none;
+        }
+        
+        .server-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-card h3 {
+            color: var(--highlight);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-link i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--highlight);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--highlight);
+        }
+        
+        .btn {
+            background: var(--highlight);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: #d13452;
+        }
+        
+        .subscribe-form {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subscribe-form h3 {
+            margin-bottom: 1rem;
+            color: var(--highlight);
+        }
+        
+        .subscribe-input {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .subscribe-input input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        footer {
+            background: var(--secondary);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .footer-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--highlight);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav li {
+                margin: 0 0.5rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .subscribe-input {
+                flex-direction: column;
+            }
+        }
+        
+        /* Эффекты для страницы */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .active-page {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                Real<span>Studio</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
+                    <li><a href="#" class="nav-link" data-page="games">Игры</a></li>
+                    <li><a href="#" class="nav-link" data-page="servers">Сервера</a></li>
+                    <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Главная страница -->
+        <div id="home" class="page active-page">
+            <div class="hero">
+                <h1>Сайт от Real_Studio о играх и будущих проектах</h1>
+                <p>Добро пожаловать на официальный сайт нашей студии! Здесь вы найдете информацию о наших играх, проектах в разработке и серверах.</p>
+            </div>
+            
+            <h2 class="section-title">Наши проекты</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>FNAS</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> UE5.5</p>
+                            <p><strong>Статус:</strong> В разработке</p>
+                            <p><strong>Жанр:</strong> Хоррор</p>
+                        </div>
+                        <p>Моя вторая игра на UE5.5. В данный момент игра в разработке. На скриншоте - бета-версия карты.</p>
+                        <p><strong>Сюжет:</strong> Как в FNAF1, только мы играем за бомжа. Сюжет в полной стадии разработки.</p>
+                        <p><strong>Разработка:</strong> Карты, скрипты, модели, сюжет - всё делаем сами. Текстуры и идеи - совместно с другом. Вместе тестируем игру.</p>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>The Endless DOOR</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> UE5.5</p>
+                            <p><strong>Статус:</strong> Не в разработке</p>
+                            <p><strong>Жанр:</strong> Головоломка, Хоррор</p>
+                        </div>
+                        <p>Моя первая игра на UE5.5. В данный момент готово меню (на фото - карта для меню).</p>
+                        <p><strong>Сюжет:</strong> Про бесконечный подъезд и двери. Нам надо сбежать из подъезда, проходя головоломки.</p>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>Friends_in_the_game</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> UE5.5</p>
+                            <p><strong>Статус:</strong> Не в разработке</p>
+                        </div>
+                        <p>Моя первая игра с серверной системой на UE5.5. В данный момент готово меню.</p>
+                        <p><strong>Идея:</strong> Игра без сюжета с одним сервером для всех игроков. Изначально задумывалась только для друзей, но я передумал.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subscribe-form">
+                <h3>Подписаться на рассылку</h3>
+                <p>Оставьте почту, мы вам напишем. Также вы будете получать новости о играх и изменениях на сайте.</p>
+                <div class="subscribe-input">
+                    <input type="email" placeholder="Ваш email">
+                    <button class="btn">Оставить почту</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Страница игр -->
+        <div id="games" class="page">
+            <h2 class="section-title">Наши игры</h2>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>FNAS</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> U55</p>
+                            <p><strong>Статус:</strong> В разработке</p>
+                            <p><strong>Жанр:</strong> Хоррор</p>
+                        </div>
+                        <p>Моя вторая игра на U55. В данный момент игра в разработке. На скриншоте - бета-версия карты.</p>
+                        <p><strong>Сюжет:</strong> Как в FNAF1, только мы играем за бомжа. Сюжет в полной стадии разработки.</p>
+                        <p><strong>Разработчики:</strong> Мы - команда из двух человек. Один занимается картами, скриптами, моделями и сюжетом, другой - текстурами, идеями и сюжетом. Вместе тестируем игру.</p>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>The Endless DOOR</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> UEs</p>
+                            <p><strong>Статус:</strong> Не в разработке</p>
+                            <p><strong>Жанр:</strong> Головоломка, Хоррор</p>
+                        </div>
+                        <p>Моя первая игра на UEs. В данный момент готово меню (на фото - март для меню).</p>
+                        <p><strong>Сюжет:</strong> Про бесконечный подъезд и двери. Нам надо сбежать из подъезда, проходя головоломки.</p>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <h3>Friends_in_the_game</h3>
+                    </div>
+                    <div class="game-content">
+                        <div class="game-info">
+                            <p><strong>Платформа:</strong> Ui5</p>
+                            <p><strong>Статус:</strong> Не в разработке</p>
+                        </div>
+                        <p>Моя первая игра с серверной системой на Ui5. В данный момент готово меню.</p>
+                        <p><strong>Идея:</strong> Игра без сюжета с одним сервером для всех игроков. Изначально задумывалась только для друзей, но я передумал.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Страница серверов -->
+        <div id="servers" class="page">
+            <h2 class="section-title">Сервера</h2>
+            
+            <div class="server-card">
+                <div class="server-header">
+                    <h3>сервер Minecraft</h3>
+                    <div class="server-date">30.06.2025</div>
+                </div>
+                <div class="server-info">
+                    <p><strong>IP:</strong> АЙЛИ АДРИС ВРЕМЕНО СКРЫТ</p>
+                    <p><strong>Версия:</strong> 1.16.5 (рекомендуем Forge для голосового чата)</p>
+                    <p><strong>Мод на голосовой чат:</strong> <a href="https://modrinth.com/mod/simple-voice-chat/versions/t-forge" target="_blank">Simple Voice Chat</a></p>
+                    <p>Информация о сервере скоро будет обновлена.</p>
+                    <p>Сервер на адресе mobist. Это адрес с поддержкой модов и плагинов.</p>
+                </div>
+            </div>
+            
+            <div class="server-card">
+                <h3>Написать нам</h3>
+                <p>Email: <a href="mailto:real.studioiz40@gmail.com">real.studioiz40@gmail.com</a></p>
+            </div>
+            
+            <div class="subscribe-form">
+                <h3>Подписаться на рассылку</h3>
+                <p>Оставьте почту, мы вам напишем. Также вы будете получать новости о играх и изменениях на сайте.</p>
+                <div class="subscribe-input">
+                    <input type="email" placeholder="Ваш email">
+                    <button class="btn">Оставить почту</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Страница контактов -->
+        <div id="contacts" class="page">
+            <h2 class="section-title">Контакты</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Наши каналы</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@%D0%BE%D1%87%D0%B8%D0%BC_%D1%81%D1%82%D1%80%D0%B8%D0%BC/" class="social-link" target="_blank">
+                            <i>▶</i> мой YouTube канал
+                        </a>
+                        <a href="https://discord.gg/kPWy54ZtHj" class="social-link" target="_blank">
+                            <i>#</i> Discord сервер
+                        </a>
+                        <a href="https://www.youtube.com/@Real_Studio_12" class="social-link" target="_blank">
+                            <i>▶</i> YouTube канал нашей студии
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Связаться с нами</h3>
+                    <div class="form-group">
+                        <label for="email">Ваш Email</label>
+                        <input type="email" id="email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" rows="4" placeholder="Ваше сообщение..."></textarea>
+                    </div>
+                    <button class="btn">Отправить сообщение</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Real_Studio. Все права защищены.</p>
+            <p>Сайт о наших играх и будущих проектах</p>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Поддержка</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Навигация по страницам
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Убираем активный класс у всех ссылок
+                document.querySelectorAll('.nav-link').forEach(l => {
+                    l.classList.remove('active');
+                });
+                
+                // Добавляем активный класс к текущей ссылке
+                this.classList.add('active');
+                
+                // Скрываем все страницы
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active-page');
+                });
+                
+                // Показываем выбранную страницу
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active-page');
+            });
+        });
+        
+        // Простая валидация формы подписки
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if(input && input.value.includes('@')) {
+                    alert('Спасибо за подписку! Мы отправим вам письмо в ближайшее время.');
+                    input.value = '';
+                } else {
+                    alert('Пожалуйста, введите корректный email адрес.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
