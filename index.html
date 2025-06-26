@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real_Studio - Официальный сайт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -25,6 +26,10 @@
             background-color: var(--primary);
             color: var(--text);
             line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(15, 52, 96, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(233, 69, 96, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
         }
         
         header {
@@ -73,10 +78,27 @@
             padding: 0.5rem 0.8rem;
             border-radius: 4px;
             transition: background 0.3s;
+            position: relative;
         }
         
         nav a:hover, nav a.active {
             background: rgba(255, 255, 255, 0.1);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav a.active::after {
+            width: 70%;
         }
         
         .container {
@@ -89,14 +111,28 @@
             text-align: center;
             padding: 3rem 0;
             margin-bottom: 2rem;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(10, 15, 35, 0.5);
             border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--highlight), var(--accent));
         }
         
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--highlight);
+            text-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
         }
         
         .hero p {
@@ -112,6 +148,13 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--accent);
             color: var(--highlight);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.5rem;
         }
         
         .games-grid {
@@ -127,21 +170,22 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .game-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.2);
         }
         
         .game-header {
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
             padding: 1.2rem;
+            text-align: center;
         }
         
         .game-header h3 {
             font-size: 1.5rem;
-            text-align: center;
         }
         
         .game-content {
@@ -169,6 +213,7 @@
             padding: 1.5rem;
             margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .server-header {
@@ -198,10 +243,12 @@
         .server-info a {
             color: var(--highlight);
             text-decoration: none;
+            transition: all 0.3s;
         }
         
         .server-info a:hover {
             text-decoration: underline;
+            color: #ff6b81;
         }
         
         .contact-grid {
@@ -215,6 +262,7 @@
             border-radius: 10px;
             padding: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .contact-card h3 {
@@ -237,88 +285,40 @@
             padding: 0.8rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 6px;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
         
         .social-link:hover {
             background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
         }
         
         .social-link i {
             margin-right: 0.8rem;
             font-size: 1.2rem;
             color: var(--highlight);
+            width: 24px;
+            text-align: center;
         }
         
-        .form-group {
-            margin-bottom: 1.5rem;
+        .contact-info {
+            margin-bottom: 1rem;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .contact-info p {
+            margin: 0.5rem 0;
             color: var(--gray);
         }
         
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            color: var(--text);
-            font-size: 1rem;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--highlight);
-        }
-        
-        .btn {
-            background: var(--highlight);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            display: inline-block;
-        }
-        
-        .btn:hover {
-            background: #d13452;
-        }
-        
-        .subscribe-form {
-            background: rgba(30, 30, 46, 0.7);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subscribe-form h3 {
-            margin-bottom: 1rem;
+        .contact-info a {
             color: var(--highlight);
+            text-decoration: none;
+            transition: color 0.3s;
         }
         
-        .subscribe-input {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .subscribe-input input {
-            flex: 1;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            color: var(--text);
-            font-size: 1rem;
+        .contact-info a:hover {
+            color: #ff6b81;
+            text-decoration: underline;
         }
         
         footer {
@@ -326,6 +326,17 @@
             padding: 2rem 0;
             margin-top: 3rem;
             text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--highlight), var(--accent));
         }
         
         .footer-content {
@@ -364,10 +375,12 @@
             
             nav ul {
                 margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             nav li {
-                margin: 0 0.5rem;
+                margin: 0.3rem;
             }
             
             .games-grid {
@@ -376,10 +389,6 @@
             
             .contact-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .subscribe-input {
-                flex-direction: column;
             }
         }
         
@@ -407,10 +416,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
-                    <li><a href="#" class="nav-link" data-page="games">Игры</a></li>
-                    <li><a href="#" class="nav-link" data-page="servers">Сервера</a></li>
-                    <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+                    <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#" class="nav-link" data-page="games"><i class="fas fa-gamepad"></i> Игры</a></li>
+                    <li><a href="#" class="nav-link" data-page="servers"><i class="fas fa-server"></i> Сервера</a></li>
+                    <li><a href="#" class="nav-link" data-page="contacts"><i class="fas fa-envelope"></i> Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -424,7 +433,7 @@
                 <p>Добро пожаловать на официальный сайт нашей студии! Здесь вы найдете информацию о наших играх, проектах в разработке и серверах.</p>
             </div>
             
-            <h2 class="section-title">Наши проекты</h2>
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Наши проекты</h2>
             <div class="games-grid">
                 <div class="game-card">
                     <div class="game-header">
@@ -467,24 +476,15 @@
                             <p><strong>Статус:</strong> Не в разработке</p>
                         </div>
                         <p>Моя первая игра с серверной системой на UE5.5. В данный момент готово меню.</p>
-                        <p><strong>Идея:</strong> Игра без сюжета с одним сервером для всех игроков. Эта игра потодия игры RUST но с одним сервером.</p>
+                        <p><strong>Идея:</strong> Игра без сюжета с одним сервером для всех игроков. Эта игра породия игры RUST но с одним сервером.</p>
                     </div>
-                </div>
-            </div>
-            
-            <div class="subscribe-form">
-                <h3>Подписаться на рассылку</h3>
-                <p>Оставьте почту, мы вам напишем. Также вы будете получать новости о играх и изменениях на сайте.</p>
-                <div class="subscribe-input">
-                    <input type="email" placeholder="Ваш email">
-                    <button class="btn">Оставить почту</button>
                 </div>
             </div>
         </div>
         
         <!-- Страница игр -->
         <div id="games" class="page">
-            <h2 class="section-title">Наши игры</h2>
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> Наши игры</h2>
             
             <div class="games-grid">
                 <div class="game-card">
@@ -536,7 +536,7 @@
         
         <!-- Страница серверов -->
         <div id="servers" class="page">
-            <h2 class="section-title">Сервера</h2>
+            <h2 class="section-title"><i class="fas fa-server"></i> Сервера</h2>
             
             <div class="server-card">
                 <div class="server-header">
@@ -551,53 +551,33 @@
                     <p>Сервер на адресе mobist. Это адрес с поддержкой модов и плагинов.</p>
                 </div>
             </div>
-            
-            <div class="server-card">
-                <h3>Написать нам</h3>
-                <p>Email: <a href="mailto:real.studio1240@gmail.com">real.studio1240@gmail.com</a></p>
-            </div>
-            
-            <div class="subscribe-form">
-                <h3>Подписаться на рассылку</h3>
-                <p>Оставьте почту, мы вам напишем. Также вы будете получать новости о играх и изменениях на сайте.</p>
-                <div class="subscribe-input">
-                    <input type="email" placeholder="Ваш email">
-                    <button class="btn">Оставить почту</button>
-                </div>
-            </div>
         </div>
         
         <!-- Страница контактов -->
         <div id="contacts" class="page">
-            <h2 class="section-title">Контакты</h2>
+            <h2 class="section-title"><i class="fas fa-address-book"></i> Контакты</h2>
             
             <div class="contact-grid">
                 <div class="contact-card">
-                    <h3>Наши каналы</h3>
+                    <h3><i class="fas fa-share-alt"></i> Наши каналы</h3>
                     <div class="social-links">
                         <a href="https://www.youtube.com/@%D0%BE%D1%87%D0%B8%D0%BC_%D1%81%D1%82%D1%80%D0%B8%D0%BC/" class="social-link" target="_blank">
-                            <i>▶</i> мой YouTube канал
+                            <i class="fab fa-youtube"></i> мой YouTube канал
                         </a>
                         <a href="https://discord.gg/kPWy54ZtHj" class="social-link" target="_blank">
-                            <i>#</i> Discord сервер
+                            <i class="fab fa-discord"></i> Discord сервер
                         </a>
                         <a href="https://www.youtube.com/@Real_Studio_12" class="social-link" target="_blank">
-                            <i>▶</i> YouTube канал нашей студии
+                            <i class="fab fa-youtube"></i> YouTube канал нашей студии
                         </a>
                     </div>
                 </div>
                 
                 <div class="contact-card">
-                    <h3>Связаться с нами</h3>
-                    <div class="form-group">
-                        <label for="email">Ваш Email</label>
-                        <input type="email" id="email" placeholder="Ваш email">
+                    <h3><i class="fas fa-envelope"></i> Написать нам</h3>
+                    <div class="contact-info">
+                        <p>Email: <a href="mailto:real.studio1240@gmail.com">real.studio1240@gmail.com</a></p>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Сообщение</label>
-                        <textarea id="message" rows="4" placeholder="Ваше сообщение..."></textarea>
-                    </div>
-                    <button class="btn">Отправить сообщение</button>
                 </div>
             </div>
         </div>
@@ -608,9 +588,9 @@
             <p>© 2025 Real_Studio. Все права защищены.</p>
             <p>Сайт о наших играх и будущих проектах</p>
             <div class="footer-links">
-                <a href="#">Политика конфиденциальности</a>
-                <a href="#">Условия использования</a>
-                <a href="#">Поддержка</a>
+                <a href="#"><i class="fas fa-lock"></i> Политика конфиденциальности</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Условия использования</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Поддержка</a>
             </div>
         </div>
     </footer>
@@ -637,19 +617,9 @@
                 // Показываем выбранную страницу
                 const pageId = this.getAttribute('data-page');
                 document.getElementById(pageId).classList.add('active-page');
-            });
-        });
-        
-        // Простая валидация формы подписки
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const input = this.previousElementSibling;
-                if(input && input.value.includes('@')) {
-                    alert('Спасибо за подписку! Мы отправим вам письмо в ближайшее время.');
-                    input.value = '';
-                } else {
-                    alert('Пожалуйста, введите корректный email адрес.');
-                }
+                
+                // Прокручиваем наверх
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>
